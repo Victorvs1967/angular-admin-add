@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, ResolveEnd, ResolveStart, Router } from '@angular/router';
+import { filter, map, merge, Observable } from 'rxjs';
+import { User } from 'src/app/model/user';
+import { AdminService } from '../../service/admin.service';
 
 @Component({
   selector: 'app-contacts',
@@ -8,11 +11,14 @@ import { Observable } from 'rxjs';
 })
 export class ContactsComponent implements OnInit {
 
-  personalList: Observable<any[]> | undefined;
+  personList: Observable<User[]> | undefined;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-  }
+
+    this.personList = this.route.data.pipe(map(data => data?.['users']));    
+    // this.personList = this.admin.getPersonList();
+}
 
 }

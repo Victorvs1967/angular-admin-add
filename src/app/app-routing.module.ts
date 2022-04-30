@@ -6,7 +6,7 @@ import { RegistrationComponent } from './component/registration/registration.com
 import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'admin', canActivate: [AuthGuard], canDeactivate: [AuthGuard], loadChildren: () => import('./component/admin/admin.module').then(m => m.AdminModule) },

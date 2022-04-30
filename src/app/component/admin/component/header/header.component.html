@@ -4,13 +4,13 @@
     <nav class="navbar">
       <ul class="navbar nav ml-auto">
         <li><a href="" class="text-info text-decoration-none ms-3 p-2" routerLinkActive="active" routerLink="home">Home</a></li>
-        <li><a href="" class="text-info text-decoration-none ms-3 p-2" routerLinkActive="active" routerLink="contacts">Personal Contact</a></li>
+        <li><a href="" class="text-info text-decoration-none ms-3 p-2" routerLinkActive="active" routerLink="contacts">Person Contacts</a></li>
       </ul>
       <button class="btn btn-info ms-3" (click)="logout()">Logout</button>
     </nav>
   </div>
 </header>
-<!-- 
-<div class="progress">
-  <div class="progress-bar progress-bar-striped progres-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-</div> -->
+<div class="progress" *ngIf="isLoading | async">
+  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75"
+    aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+</div>
