@@ -20,6 +20,10 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  isAdmin() {
+    return this.getToken()
+  }
+
   isLoggedIn() {
     return this.getToken() !== null;
   }
