@@ -9,7 +9,6 @@ import { ContactsComponent } from './component/contacts/contacts.component';
 import { ContactDetailsComponent } from './component/contact-details/contact-details.component';
 import { AdminDashboardComponent } from './component/admin-dashboard/admin-dashboard.component';
 import { MaterialUiModule } from 'src/app/module/material-ui/material-ui.module';
-import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({

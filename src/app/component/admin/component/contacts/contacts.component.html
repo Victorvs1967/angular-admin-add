@@ -2,7 +2,7 @@
   <div class="card bg-dark text-white mt-2 p-1" style="border-radius: 1rem;" *ngFor="let user of personList | async">
     <div class="card-body text-center p-2">
       <div>
-        <h5>{{ user.name }}</h5>
+        <h2 class="p-0 mb-2">{{ user.name }}</h2>
         <button class="btn btn-success" [routerLink]="['user', user.id]">Details</button>
       </div>
     </div>

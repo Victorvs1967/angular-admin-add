@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
       email: [ '', [ Validators.required, Validators.email ] ],
       password: [ '', [ Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/) ] ]
     });
-    if (this.auth.isLoggedIn()) this.router.navigate(['admin']);
+    if (this.auth.isLoggedIn) this.router.navigate(['admin']);
   }
 
   submitLogin() {

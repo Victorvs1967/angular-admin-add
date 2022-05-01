@@ -11,6 +11,8 @@ import { RegistrationComponent } from './component/registration/registration.com
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialUiModule } from './module/material-ui/material-ui.module';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './component/home/home.component';
+import { HeaderComponent } from './component/header/header.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     NotFoundComponent,
     RegistrationComponent,
+    HomeComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

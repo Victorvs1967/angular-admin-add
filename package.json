@@ -1,5 +1,5 @@
 {
-  "name": "angular-admin-add",
+  "name": "angular-admin-app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
