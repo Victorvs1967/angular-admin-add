@@ -4,8 +4,13 @@
       <div>
         <h3 class="p-0 m-0">User Details:</h3>
         <section *ngIf="user | async as user">
-          <h2 class="p-0 m-0">{{ user.name }}</h2>
-          <p>{{ user.email }}</p>
+          <h3 class="p-0 m-0">{{ user.username }}</h3>
+          <h2 class="p-0 m-0" *ngIf="user.firstName">{{ user.firstName }} {{ user.lastName}}</h2><br>
+          <p><strong>role:</strong><br>{{ user.role }}</p>
+          <p><strong>email:</strong><br>{{ user.email }}</p>
+          <p><strong>phone:</strong><br>{{ user.phone }}</p>
+          <p><strong>address:</strong><br>{{ user.address }}</p>
+          <p><strong>created:</strong><br>{{ user.onCreate | date: "dd.MM.yyyy, HH:mm:ss" }}</p>
         </section>
       </div>
       <button class="btn btn-success" [routerLink]="['../']">Go Back</button>

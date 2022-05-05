@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from 'src/app/model/user';
+import { User } from 'src/app/model/user.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -10,11 +10,13 @@ export class AdminService {
 
   constructor(private http: HttpClient) { }
 
+  
+
   getPersonList() {
-    return this.http.get<User[]>(environment.apiUrl.concat(environment.usersSfx))
+    return this.http.get<User[]>(environment.baseUrl.concat(environment.apiUrl))
   }
 
-  getPerson(id: number) {
-    return this.http.get<User>(`${environment.apiUrl}/${id}`);
+  getPerson(username: string) {
+    return this.http.get<User>(`${environment.baseUrl}${environment.apiUrl}/${username}`);
   }
 }

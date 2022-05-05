@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ResolveEnd, ResolveStart, Router } from '@angular/router';
 import { filter, map, merge, Observable } from 'rxjs';
-import { User } from 'src/app/model/user';
+import { User } from 'src/app/model/user.model';
 import { AdminService } from '../../service/admin.service';
 
 @Component({

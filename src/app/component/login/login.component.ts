@@ -16,8 +16,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      email: [ '', [ Validators.required, Validators.email ] ],
-      password: [ '', [ Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/) ] ]
+      username: [ '', [ Validators.required ] ],
+      password: [ '', [ Validators.required ] ]
+      // email: [ '', [ Validators.required, Validators.email ] ],
+      // password: [ '', [ Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/) ] ]
     });
     if (this.auth.isLoggedIn) this.router.navigate(['admin']);
   }

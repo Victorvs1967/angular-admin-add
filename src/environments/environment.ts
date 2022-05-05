@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://jsonplaceholder.typicode.com/users',
-  usersSfx: '?_start=0&_limit=5',
+  baseUrl: 'http://localhost:8080',
+  apiUrl: '/api/users',
+  authUrl: '/auth',
 };
 
 /*

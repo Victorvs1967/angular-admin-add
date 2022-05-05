@@ -5,7 +5,7 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 import { catchError, delay, EMPTY, Observable, of } from 'rxjs';
-import { User } from 'src/app/model/user';
+import { User } from 'src/app/model/user.model';
 import { AdminService } from '../service/admin.service';
 
 @Injectable({
@@ -17,7 +17,7 @@ export class UsersResolver implements Resolve<User[]> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User[]> {
     return this.admin.getPersonList().pipe(
-      delay(2000)
+      delay(100)
     );
   }
 }

@@ -10,9 +10,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './component/registration/registration.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialUiModule } from './module/material-ui/material-ui.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './component/home/home.component';
 import { HeaderComponent } from './component/header/header.component';
+import { TokenInterceptor } from './interceptor/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { HeaderComponent } from './component/header/header.component';
     MaterialUiModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

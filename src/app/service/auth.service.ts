@@ -1,10 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, concat, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Role } from '../model/role.model';
+import { User } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  isUsername: string | undefined;
 
   private loggedIn = new BehaviorSubject<boolean>(false);
   private adminIn = new BehaviorSubject<boolean>(false);
@@ -15,46 +21,60 @@ export class AuthService {
   }
 
   get isAdmin(): Observable<boolean> {
-    this.loggedIn.next(this.getToken() === 'admin:admin123' ? true : false);
+    this.loggedIn.next(this.getToken() !== null ? true : false);
     return this.adminIn.asObservable();
   }
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   setToken(token: string) {
-    localStorage.setItem('token', token);
+    sessionStorage.setItem('token', token);
   }
 
   clearToken() {
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
   }
 
   getToken() {
-    return localStorage.getItem('token');
+    return sessionStorage.getItem('token');
   }
 
   onLogin(): boolean {
-    return localStorage.getItem('token') ? true : false;
+    return sessionStorage.getItem('token') ? true : false;
   }
 
-  onAdmin(): boolean {
-    return this.getToken() === 'admin:admin123' ? true : false;
+  onAdmin(): Observable<boolean | any> {
+    return this.http.get<User>(environment.baseUrl.concat(environment.apiUrl).concat('/').concat(this.isUsername!)).pipe(map(user => {
+      console.log(user);
+      this.adminIn.next(user.role === 'ADMIN');
+      return of(user.role === Role.ADMIN)
+    }));
+
   }
 
-  login(userInfo: { email: string, password: string }): Observable<string | boolean> {
-    if (userInfo.email === 'admin@mail.me' && userInfo.password === 'admin123') {
-      this.clearToken();
-      this.setToken('admin:admin123');
-      this.loggedIn.next(true);
-      this.adminIn.next(true);
-      return of(true);
-    } else if (userInfo.email !== '' && userInfo.password !== '') {
-      this.clearToken();
-      this.setToken(userInfo.email.concat(':').concat(userInfo.password));
-      this.loggedIn.next(true);
-      this.adminIn.next(false);
-      return of(true);
-    }
+  login(userInfo: { username: string, password: string }): Observable<any | boolean> {
+    return this.http.post(environment.baseUrl.concat(environment.authUrl).concat('/login'), userInfo).pipe(map((token: any) => {
+        this.clearToken();
+        this.setToken(token.token);
+        this.loggedIn.next(true);
+        this.isUsername = userInfo.username;
+        return of(true);
+      }
+    ));
+
+    // if (userInfo.email === 'admin@mail.me' && userInfo.password === 'admin123') {
+    //   this.clearToken();
+    //   this.setToken('admin:admin123');
+    //   this.loggedIn.next(true);
+    //   this.adminIn.next(true);
+    //   return of(true);
+    // } else if (userInfo.email !== '' && userInfo.password !== '') {
+    //   this.clearToken();
+    //   this.setToken(userInfo.email.concat(':').concat(userInfo.password));
+    //   this.loggedIn.next(true);
+    //   this.adminIn.next(false);
+    //   return of(true);
+    // }
     this.loggedIn.next(false);
     this.adminIn.next(false);
     return throwError(() => new Error('Failed login'));
