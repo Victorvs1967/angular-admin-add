@@ -11,11 +11,15 @@ import { AuthService } from 'src/app/service/auth.service';
 export class HeaderComponent implements OnInit {
 
   isLogin: Observable<boolean> | undefined;
+  isAdmin: Observable<boolean> | undefined;
 
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.isLogin = this.auth.isLoggedIn;
+    this.isAdmin = this.auth.isAdmin;
+
+    this.isAdmin.subscribe(isAdmin => console.log(isAdmin));
   }
 
   login() {

@@ -16,12 +16,12 @@ export class AuthService {
   private adminIn = new BehaviorSubject<boolean>(false);
 
   get isLoggedIn(): Observable<boolean> {
-    this.loggedIn.next(this.getToken() ? true : false);
+    this.loggedIn.next(this.onLogin());
     return this.loggedIn.asObservable();
   }
 
   get isAdmin(): Observable<boolean> {
-    this.loggedIn.next(this.getToken() !== null ? true : false);
+    this.adminIn.next(this.onLogin());
     return this.adminIn.asObservable();
   }
 
@@ -75,6 +75,7 @@ export class AuthService {
     //   this.adminIn.next(false);
     //   return of(true);
     // }
+
     this.loggedIn.next(false);
     this.adminIn.next(false);
     return throwError(() => new Error('Failed login'));

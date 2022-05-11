@@ -17,5 +17,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.isAdmin = this.auth.isAdmin;
     this.isLogin = this.auth.isLoggedIn;
+
+    this.isAdmin.subscribe(isAdmin => console.log(isAdmin));
   }
 }

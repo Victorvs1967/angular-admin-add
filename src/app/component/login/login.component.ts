@@ -11,7 +11,10 @@ import { AuthService } from 'src/app/service/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm?: FormGroup;
+  isLogin: Observable<boolean> | undefined;
+  isAdmin: Observable<boolean> | undefined;
 
+ 
   constructor(private formBuilder: FormBuilder, private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void {
@@ -21,14 +24,17 @@ export class LoginComponent implements OnInit {
       // email: [ '', [ Validators.required, Validators.email ] ],
       // password: [ '', [ Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/) ] ]
     });
-    if (this.auth.isLoggedIn) this.router.navigate(['admin']);
+    this.isLogin = this.auth.isLoggedIn;
+    this.isAdmin = this.auth.isAdmin;
+
+    if (this.auth.isAdmin) this.router.navigate(['admin']);
   }
 
   submitLogin() {
     this.auth.login(this.loginForm?.value).subscribe({
       next: () => {
-        this.router.navigate(['admin']);
         this.loginForm?.reset();
+        this.router.navigate(['admin']);
       },
       error: err => alert(err.message)
     });
