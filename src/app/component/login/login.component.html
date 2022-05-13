@@ -8,13 +8,13 @@
             <p class="text-white-50 mb-5">Please enter your login and password!</p>
             <form *ngIf="loginForm" [formGroup]="loginForm" (ngSubmit)="submitLogin()">
               <div class="form-outline form-white mb-4">
+                <label for="typeUsernameX" class="form-label">Username</label>
                 <input type="text" class="form-control form-control-lg" id="typeUsernameX" formControlName="username">
-                <label for="typeUsernameX" class="form-label">Email</label>
                 <p *ngIf="loginForm.controls['username']?.invalid && loginForm.controls['username']?.touched"><small class="text-danger">Username is required</small></p>
               </div>
               <div class="form-outline form-white mb-4">
-                <input type="password" class="form-control form-control-lg" id="typePasswordX" formControlName="password">
                 <label for="typePasswordX" class="form-label">Password</label>
+                <input type="password" class="form-control form-control-lg" id="typePasswordX" formControlName="password">
                 <p *ngIf="loginForm.controls['password']?.invalid && loginForm.controls['password']?.touched"><small class="text-danger">Password is required (leght more then 8 characters) </small></p>
               </div>
               <button [disabled]="loginForm.invalid" class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>

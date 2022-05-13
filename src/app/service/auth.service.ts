@@ -81,6 +81,11 @@ export class AuthService {
     return throwError(() => new Error('Failed login'));
   }
 
+  // signup(userInfo: { username: string, password: string, email: string }): Observable<any | boolean> {
+  signup(user: User): Observable<any | boolean> {
+    return this.http.post(environment.baseUrl.concat(environment.authUrl).concat('/signup'), user)
+  }
+
   logout() {
     this.loggedIn.next(false);
     this.adminIn.next(false);
