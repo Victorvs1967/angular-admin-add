@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ResolveEnd, ResolveStart, Router } from '@angular/router';
 import { filter, map, merge, Observable } from 'rxjs';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,7 @@ export class HeaderComponent implements OnInit {
   hideLoader: Observable<boolean> | undefined;
   isLoading: Observable<boolean> | undefined;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void {
 
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
+    this.auth.logout();
     this.router.navigate(['login']);
   }
 

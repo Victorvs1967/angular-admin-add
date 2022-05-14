@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   isLogin: Observable<boolean> | undefined;
   isAdmin: Observable<boolean> | undefined;
 
- 
+
   constructor(private formBuilder: FormBuilder, private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void {
@@ -26,14 +26,14 @@ export class LoginComponent implements OnInit {
       // password: [ '', [ Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/) ] ]
     });
     this.isLogin = this.auth.isLoggedIn;
-    // this.isAdmin = this.auth.isAdmin;
+    this.auth.onAdmin().subscribe(r => this.isAdmin = r);
   }
 
   submitLogin() {
     this.auth.login(this.loginForm?.value).subscribe({
       next: () => {
         this.loginForm?.reset();
-        if (this.auth.isAdmin) this.router.navigate(['admin']);
+        this.isAdmin  ? this.router.navigate(['admin']) : this.router.navigate(['home']);        
       },
       error: err => alert(err.message)
     });

@@ -8,9 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AdminService {
 
-  constructor(private http: HttpClient) { }
-
-  
+  constructor(private http: HttpClient) { }  
 
   getPersonList() {
     return this.http.get<User[]>(environment.baseUrl.concat(environment.apiUrl))

@@ -11,8 +11,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'admin', canActivate: [AuthGuard], canDeactivate: [AuthGuard], canActivateChild: [AdminGuard], loadChildren: () => import('./component/admin/admin.module').then(m => m.AdminModule) },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard], canDeactivate: [AuthGuard] },
+  { path: 'admin', canActivate: [AuthGuard], canActivateChild: [AdminGuard], loadChildren: () => import('./component/admin/admin.module').then(m => m.AdminModule) },
   { path: '**', component: NotFoundComponent },
 ];
 
